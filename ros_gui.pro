@@ -10,12 +10,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ros_gui
 TEMPLATE = app
+CONFIG += c++11 console
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += BOOST_USE_LIB
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -34,6 +36,8 @@ FORMS += \
         tifferpelode.ui
 
 INCLUDEPATH += -I /opt/ros/kinetic/include
+INCLUDEPATH += -I /usr/include/boost
+
 DEPENDPATH +=  /opt/ros/kinetic/include
 
 unix:!macx: LIBS += -L /opt/ros/kinetic/lib -lroscpp
@@ -51,3 +55,6 @@ unix:!macx: LIBS += -L /opt/ros/kinetic/lib -lrosconsole_backend_interface
 unix:!macx: LIBS += -L /opt/ros/kinetic/lib -lxmlrpcpp
 
 LIBS += -L /opt/ros/kinetic/lib -lcpp_common
+
+LIBS +=/usr/lib/x86_64-linux-gnu/libboost_thread.a
+LIBS +=/usr/lib/x86_64-linux-gnu/libboost_system.a
