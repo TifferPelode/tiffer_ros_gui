@@ -30,7 +30,8 @@ SOURCES += \
         tifferpelode.cpp
 
 HEADERS += \
-        tifferpelode.h
+        tifferpelode.h \
+    aaa.h
 
 FORMS += \
         tifferpelode.ui
@@ -56,5 +57,5 @@ unix:!macx: LIBS += -L /opt/ros/kinetic/lib -lxmlrpcpp
 
 LIBS += -L /opt/ros/kinetic/lib -lcpp_common
 
-LIBS +=/usr/lib/x86_64-linux-gnu/libboost_thread.a
-LIBS +=/usr/lib/x86_64-linux-gnu/libboost_system.a
+LIBS += /usr/lib/x86_64-linux-gnu/libboost_thread.a
+LIBS += /usr/lib/x86_64-linux-gnu/libboost_system.a
