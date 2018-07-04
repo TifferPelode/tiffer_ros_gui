@@ -16,8 +16,8 @@ TifferPelode::TifferPelode(QWidget *parent) :
     Test_tiffer *me = new Test_tiffer();
 
     connect(ui->pb1, SIGNAL(clicked()), my, SLOT(first()));//, Qt::QueuedConnection);
-    connect(ui->pb2, SIGNAL(clicked()), my, SLOT(second()));//, Qt::QueuedConnection);
-    connect(ui->pb3, SIGNAL(clicked()), me, SLOT(third()));//, Qt::QueuedConnection);
+    connect(ui->pb2, SIGNAL(clicked()), me, SLOT(second()));//, Qt::QueuedConnection);
+    //connect(ui->pb3, SIGNAL(clicked()), me, SLOT(third()));//, Qt::QueuedConnection);
     connect(ui->testButton, SIGNAL(clicked()), this, SLOT(testTf2()));
     connect(ui->getCLocation, SIGNAL(clicked()), this, SLOT(getCurrentLocation()));
 
@@ -29,7 +29,7 @@ TifferPelode::TifferPelode(QWidget *parent) :
 
     thread1->start();
     thread2->start();
-    //connect(thread, SIGNAL(started()), my, SLOT(first()));
+    connect(thread2, SIGNAL(started()), me, SLOT(third()));
 
 
 }
@@ -91,14 +91,14 @@ void TifferPelode::finishedThing()
     qDebug() << "finished";
 }
 
-void TifferPelode::getCurrentLocation()//geometry_msgs::Pose &pose)
+void TifferPelode::getCurrentLocation(geometry_msgs::Pose &pose)
 {
     tf::TransformListener listener;
     tf::StampedTransform transform;
 
     try{
         listener.waitForTransform("/map", "/base_link", ros::Time::now(), ros::Duration(2));
-        listener.lookupTransform("map", "base_link", ros::Time(0), transform);
+        listener.lookupTransform("/map", "/base_link", ros::Time(0), transform);
     } catch (tf::TransformException ex){
         ROS_ERROR("%s", ex.what());
         ros::Duration(1.0).sleep();

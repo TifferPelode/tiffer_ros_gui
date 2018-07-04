@@ -47,7 +47,7 @@ public:
 public slots:
     void testTf2();
     void finishedThing();
-    void getCurrentLocation();
+    void getCurrentLocation(geometry_msgs::Pose &pose);
 
 private:
     Ui::TifferPelode *ui;

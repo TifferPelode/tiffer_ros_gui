@@ -31,7 +31,8 @@ SOURCES += \
 
 HEADERS += \
         tifferpelode.h \
-    aaa.h
+    aaa.h \
+    weChatMess_.hpp
 
 FORMS += \
         tifferpelode.ui
@@ -59,3 +60,5 @@ LIBS += -L /opt/ros/kinetic/lib -lcpp_common
 
 LIBS += /usr/lib/x86_64-linux-gnu/libboost_thread.a
 LIBS += /usr/lib/x86_64-linux-gnu/libboost_system.a
+
+LIBS += /usr/local/lib/liblcm.so
