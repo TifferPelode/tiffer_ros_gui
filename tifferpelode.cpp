@@ -7,37 +7,43 @@ TifferPelode::TifferPelode(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    my = new Mul_thread();
-    me = new Mul_thread();
+    obj1 = new Mul_thread();
+    obj2 = new Mul_thread();
+    obj3 = new Do_something();
 
     thread1 = new QThread();
     thread2 = new QThread();
+    thread3 = new QThread();
 
-    my->moveToThread(thread1);
-    me->moveToThread(thread2);
+    obj1->moveToThread(thread1);
+    obj2->moveToThread(thread2);
+    obj3->moveToThread(thread3);
 
-    connect(ui->pb1, SIGNAL(clicked()), my, SLOT(first()));//, Qt::QueuedConnection);
-    connect(ui->pb2, SIGNAL(clicked()), me, SLOT(second()));//, Qt::QueuedConnection);
-    connect(ui->pb3, SIGNAL(clicked()), me, SLOT(third()));//, Qt::QueuedConnection);
+    connect(ui->pb1, SIGNAL(clicked()), obj1, SLOT(first()));//, Qt::QueuedConnection);
+    connect(ui->pb2, SIGNAL(clicked()), obj2, SLOT(second()));//, Qt::QueuedConnection);
+    connect(ui->pb3, SIGNAL(clicked()), obj3, SLOT(do_one()));//, Qt::QueuedConnection);
     connect(ui->getCLocation, SIGNAL(clicked()), this, SLOT(getCurrentLocation(geometry_msgs::Pose &pose)));
 
     thread1->start();
     thread2->start();
+    thread3->start();
     //connect(thread2, SIGNAL(started()), me, SLOT(third()));
 
 }
 
 TifferPelode::~TifferPelode()
 {
-    me->m_flag = false;
     delete ui;
 
     thread1->exit(0);
     thread2->exit(0);
+    thread3->exit(0);
     thread1->wait();
     thread2->wait();
+    thread3->wait();
     thread1->deleteLater();
     thread2->deleteLater();
+    thread3->deleteLater();
 }
 
 void TifferPelode::pub_message()

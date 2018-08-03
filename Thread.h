@@ -38,4 +38,17 @@ public slots:
         qDebug() << "third exit";
     }
 };
+
+class Do_something : public QObject {
+    Q_OBJECT
+public:
+    Do_something() {}
+    ~Do_something() {}
+
+public slots:
+    void do_one() {
+        qDebug() << QThread::currentThreadId();
+        qDebug() << "do one";
+    }
+};
 #endif // THREAD_H

@@ -48,8 +48,9 @@ public:
     explicit TifferPelode(QWidget *parent = 0);
     ~TifferPelode();
 
-    Mul_thread *my;
-    Mul_thread *me;
+    Mul_thread *obj1;
+    Mul_thread *obj2;
+    Do_something *obj3;
 
 public slots:
     void finishedThing();
@@ -65,6 +66,7 @@ private:
 
     QThread *thread1;
     QThread *thread2;
+    QThread *thread3;
 
     void pub_message();
 
