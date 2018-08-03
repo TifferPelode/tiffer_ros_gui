@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,12 +27,13 @@ DEFINES += BOOST_USE_LIB
 
 SOURCES += \
         main.cpp \
-        tifferpelode.cpp
+        tifferpelode.cpp \
+    location_manager.cpp
 
 HEADERS += \
         tifferpelode.h \
-    aaa.h \
-    weChatMess_.hpp
+    location_manager.h \
+    Thread.h
 
 FORMS += \
         tifferpelode.ui

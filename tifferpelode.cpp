@@ -7,19 +7,8 @@ TifferPelode::TifferPelode(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //chatter_pub_ = nh_.advertise<std_msgs::String>("chatter", 1000);
-    //pub_message();
-
-
-
-    Test_tiffer *my = new Test_tiffer();
-    Test_tiffer *me = new Test_tiffer();
-
-    connect(ui->pb1, SIGNAL(clicked()), my, SLOT(first()));//, Qt::QueuedConnection);
-    connect(ui->pb2, SIGNAL(clicked()), me, SLOT(second()));//, Qt::QueuedConnection);
-    //connect(ui->pb3, SIGNAL(clicked()), me, SLOT(third()));//, Qt::QueuedConnection);
-    connect(ui->testButton, SIGNAL(clicked()), this, SLOT(testTf2()));
-    connect(ui->getCLocation, SIGNAL(clicked()), this, SLOT(getCurrentLocation()));
+    my = new Mul_thread();
+    me = new Mul_thread();
 
     thread1 = new QThread();
     thread2 = new QThread();
@@ -27,15 +16,20 @@ TifferPelode::TifferPelode(QWidget *parent) :
     my->moveToThread(thread1);
     me->moveToThread(thread2);
 
+    connect(ui->pb1, SIGNAL(clicked()), my, SLOT(first()));//, Qt::QueuedConnection);
+    connect(ui->pb2, SIGNAL(clicked()), me, SLOT(second()));//, Qt::QueuedConnection);
+    connect(ui->pb3, SIGNAL(clicked()), me, SLOT(third()));//, Qt::QueuedConnection);
+    connect(ui->getCLocation, SIGNAL(clicked()), this, SLOT(getCurrentLocation(geometry_msgs::Pose &pose)));
+
     thread1->start();
     thread2->start();
-    connect(thread2, SIGNAL(started()), me, SLOT(third()));
-
+    //connect(thread2, SIGNAL(started()), me, SLOT(third()));
 
 }
 
 TifferPelode::~TifferPelode()
 {
+    me->m_flag = false;
     delete ui;
 
     thread1->exit(0);
@@ -70,22 +64,6 @@ void TifferPelode::pub_message()
     }
 }
 
-void TifferPelode::testTf2()
-{
-    geometry_msgs::Pose new_pose;
-    //getLocation(new_pose);
-
-//    qDebug() << new_pose.position.x;
-//    qDebug() << new_pose.position.y;
-//    qDebug() << new_pose.position.z;
-//    qDebug() << new_pose.orientation.x;
-//    qDebug() << new_pose.orientation.y;
-//    qDebug() << new_pose.orientation.z;
-//    qDebug() << new_pose.orientation.w;
-
-    qDebug() << QThread::currentThreadId();
-}
-
 void TifferPelode::finishedThing()
 {
     qDebug() << "finished";
@@ -115,7 +93,7 @@ void TifferPelode::getCurrentLocation(geometry_msgs::Pose &pose)
     pose.orientation.z = tt.rotation.z;
     pose.orientation.w = tt.rotation.w;
 
-    tt = ts.transform;
+    tt = ts_.transform;
 
     qDebug() << tt.translation.x;
     qDebug() << tt.translation.y;

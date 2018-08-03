@@ -1,8 +1,13 @@
 #ifndef TIFFERPELODE_H
 #define TIFFERPELODE_H
 
-#include "aaa.h"
+#include "Thread.h"
+#include "location_manager.h"
 
+#include <QAudioInput>
+#include <QAudioRecorder>
+#include <QFile>
+#include <QAudioEncoderSettings>
 #include <QMainWindow>
 #include <QThread>
 #include <QDebug>
@@ -30,7 +35,8 @@
 
 namespace Ui {
 class TifferPelode;
-class Test_tiffer;
+class Mul_thread;
+class LocationManager;
 }
 
 class TifferPelode : public QMainWindow
@@ -42,10 +48,10 @@ public:
     explicit TifferPelode(QWidget *parent = 0);
     ~TifferPelode();
 
-
+    Mul_thread *my;
+    Mul_thread *me;
 
 public slots:
-    void testTf2();
     void finishedThing();
     void getCurrentLocation(geometry_msgs::Pose &pose);
 
@@ -54,9 +60,8 @@ private:
 
     ros::NodeHandle nh_;
     ros::Publisher chatter_pub_;
-
-    geometry_msgs::Transform tt;
-    geometry_msgs::TransformStamped ts;
+    geometry_msgs::TransformStamped ts_;
+    LocationManagerPtr location_manager_;
 
     QThread *thread1;
     QThread *thread2;
