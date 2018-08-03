@@ -28,7 +28,8 @@ DEFINES += BOOST_USE_LIB
 SOURCES += \
         main.cpp \
         tifferpelode.cpp \
-    location_manager.cpp
+    location_manager.cpp \
+    thread.cpp
 
 HEADERS += \
         tifferpelode.h \

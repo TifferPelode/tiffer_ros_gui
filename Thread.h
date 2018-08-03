@@ -14,29 +14,9 @@ public:
     bool m_flag;
 
 public slots:
-    void first() {
-        qDebug() << QThread::currentThreadId();
-        qDebug() << "first: ";
-        for(int i = 0; i < 3; i++){
-            qDebug() << "aaa";
-            QThread::sleep(1);
-        }
-    }
-    void second() {
-        qDebug() << QThread::currentThreadId();
-        qDebug() << "second: ";
-
-        for(int i = 0; i < 3; i++){
-            qDebug() << "bbb";
-            QThread::sleep(1);
-        }
-    }
-    void third() {
-        qDebug() << QThread::currentThreadId();
-        qDebug() << "third: ";
-
-        qDebug() << "third exit";
-    }
+    void first();
+    void second();
+    void third();
 };
 
 class Do_something : public QObject {
@@ -46,9 +26,9 @@ public:
     ~Do_something() {}
 
 public slots:
-    void do_one() {
-        qDebug() << QThread::currentThreadId();
-        qDebug() << "do one";
-    }
+    void do_one();
+
+signals:
+    void status();
 };
 #endif // THREAD_H

@@ -55,6 +55,7 @@ public:
 public slots:
     void finishedThing();
     void getCurrentLocation(geometry_msgs::Pose &pose);
+    void show_signal();
 
 private:
     Ui::TifferPelode *ui;

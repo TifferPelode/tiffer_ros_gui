@@ -23,12 +23,11 @@ TifferPelode::TifferPelode(QWidget *parent) :
     connect(ui->pb2, SIGNAL(clicked()), obj2, SLOT(second()));//, Qt::QueuedConnection);
     connect(ui->pb3, SIGNAL(clicked()), obj3, SLOT(do_one()));//, Qt::QueuedConnection);
     connect(ui->getCLocation, SIGNAL(clicked()), this, SLOT(getCurrentLocation(geometry_msgs::Pose &pose)));
+    connect(obj3, SIGNAL(status()), this, SLOT(show_signal()));
 
     thread1->start();
     thread2->start();
     thread3->start();
-    //connect(thread2, SIGNAL(started()), me, SLOT(third()));
-
 }
 
 TifferPelode::~TifferPelode()
@@ -108,4 +107,9 @@ void TifferPelode::getCurrentLocation(geometry_msgs::Pose &pose)
     qDebug() << tt.rotation.y;
     qDebug() << tt.rotation.z;
     qDebug() << tt.rotation.w;
+}
+
+void TifferPelode::show_signal()
+{
+    qDebug() << "signal get, show a slot.";
 }
