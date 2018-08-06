@@ -19,16 +19,19 @@ public slots:
     void third();
 };
 
-class Do_something : public QObject {
+class Update_param : public QObject {
     Q_OBJECT
 public:
-    Do_something() {}
-    ~Do_something() {}
+    Update_param() {}
+    ~Update_param() {}
+
+    double linear_speed;
+    double angle_speed;
 
 public slots:
-    void do_one();
+    void do_update();
 
 signals:
-    void status();
+    void update_param_signal(double, double);
 };
 #endif // THREAD_H

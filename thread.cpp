@@ -29,10 +29,10 @@ void Mul_thread::third()
     qDebug() << "third exit";
 }
 
-void Do_something::do_one()
+void Update_param::do_update()
 {
-    qDebug() << QThread::currentThreadId();
-    qDebug() << "do one";
-
-    emit status();
+    linear_speed = 12.3451;
+    angle_speed = 67.8901;
+    qDebug() << "update param signal is called";
+    emit update_param_signal(linear_speed, angle_speed);
 }

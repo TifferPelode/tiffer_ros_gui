@@ -11,6 +11,7 @@
 #include <QMainWindow>
 #include <QThread>
 #include <QDebug>
+#include <QPalette>
 
 #include <ros/ros.h>
 #include <ros/package.h>
@@ -50,12 +51,12 @@ public:
 
     Mul_thread *obj1;
     Mul_thread *obj2;
-    Do_something *obj3;
+    Update_param *obj3;
 
 public slots:
     void finishedThing();
-    void getCurrentLocation(geometry_msgs::Pose &pose);
-    void show_signal();
+
+    void update_param_slot(double, double);
 
 private:
     Ui::TifferPelode *ui;
@@ -65,10 +66,11 @@ private:
     geometry_msgs::TransformStamped ts_;
     LocationManagerPtr location_manager_;
 
-    QThread *thread1;
-    QThread *thread2;
-    QThread *thread3;
+    QThread *thread1_;
+    QThread *thread2_;
+    QThread *thread3_;
 
+    void getCurrentLocation(geometry_msgs::Pose &pose);
     void pub_message();
 
 };

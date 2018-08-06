@@ -64,3 +64,6 @@ LIBS += /usr/lib/x86_64-linux-gnu/libboost_thread.a
 LIBS += /usr/lib/x86_64-linux-gnu/libboost_system.a
 
 LIBS += /usr/local/lib/liblcm.so
+
+RESOURCES += \
+    resource.qrc
